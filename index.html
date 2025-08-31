@@ -1,79 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bio Data - MONIRUL HASAN TALHA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: "Noto Sans Bengali", Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    :root{
+      --bg1:#08131a;
+      --bg2:#0f2a2b;
+      --accent:#1db954; /* spotify-like */
+      --card-radius:18px;
     }
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      max-width: 700px;
-      width: 100%;
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: 'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: radial-gradient(1000px 600px at 10% 10%, rgba(29,185,84,0.06), transparent),
+                  radial-gradient(800px 500px at 90% 90%, rgba(30,215,96,0.04), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
+      color:#e9f1f0;
     }
-    h1 { text-align: center; margin-bottom: 10px; }
-    h2 { margin-top: 25px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-    p { margin: 5px 0; }
-    ul { margin: 0; padding-left: 18px; }
+
+    .glow {
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image: radial-gradient(circle at 20% 20%, rgba(29,185,84,0.06), transparent 6%),
+                        radial-gradient(circle at 85% 80%, rgba(30,215,96,0.04), transparent 8%);
+      mix-blend-mode:screen;
+    }
+
+    .wrap{
+      width:100%; max-width:880px; position:relative; z-index:2;
+    }
+
+    header.topbar{
+      height:64px; border-radius:12px; margin-bottom:18px;
+      overflow:hidden; display:flex; align-items:center;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(8px) saturate(1.1);
+    }
+
+    .marquee{
+      white-space:nowrap; overflow:hidden; width:100%;
+      display:flex; align-items:center; height:100%;
+      padding:0 18px;
+    }
+    .marquee .track{
+      display:inline-block; padding-left:100%; animation:scroll-left 18s linear infinite;
+      will-change:transform;
+    }
+    @keyframes scroll-left{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-100%)}
+    }
+
+    .name-run span{ font-weight:700; font-size:20px; margin-right:6px; display:inline-block; }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:var(--card-radius);
+      padding:28px;
+      border:1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px) saturate(1.1);
+      box-shadow: 0 8px 40px rgba(2,8,10,0.6);
+      display:flex; gap:20px; align-items:flex-start;
+    }
+
+    .avatar{
+      flex:0 0 180px; display:flex; align-items:center; justify-content:center;
+    }
+    .avatar img{ width:160px; height:160px; border-radius:50%; object-fit:cover; border:6px solid rgba(255,255,255,0.06); box-shadow: 0 8px 30px rgba(29,185,84,0.06), inset 0 2px 6px rgba(255,255,255,0.02); }
+
+    .content{ flex:1; }
+    h1.title{ font-size:22px; margin:0 0 6px 0; letter-spacing:0.6px; display:flex; align-items:center; gap:12px; }
+
+    .meta{ color:rgba(230,245,233,0.8); margin-bottom:14px }
+
+    h2{ font-size:16px; margin:18px 0 8px 0; color:#cfeee0; border-bottom:1px dashed rgba(255,255,255,0.03); padding-bottom:6px }
+    p, li{ color: #dff7ea; opacity:0.95 }
+    ul{ margin:6px 0 0 18px }
+
+    .badge{ display:inline-block; padding:6px 10px; border-radius:999px; background:linear-gradient(90deg, rgba(29,185,84,0.14), rgba(29,185,84,0.06)); color:var(--accent); font-weight:700; font-size:13px }
+
+    @media (max-width:720px){
+      .card{ flex-direction:column; align-items:center; text-align:center }
+      .avatar{ order:-1 }
+      .marquee .track{ animation-duration:12s }
+      .name-run span{ font-size:18px }
+    }
+
+    .accent-line{ height:4px; width:72px; border-radius:99px; margin-bottom:10px; background: linear-gradient(90deg,var(--accent), #66d17a); box-shadow:0 6px 24px rgba(29,185,84,0.08) }
+
+    @keyframes hueShift{ 0%{filter:hue-rotate(0deg)} 50%{filter:hue-rotate(60deg)} 100%{filter:hue-rotate(0deg)} }
+
   </style>
 </head>
 <body>
-  <div class="card">
-           <img src="WhatsApp Image 2025-08-30 at 18.45.53_af15fd1e.jpg" alt="My Photo" width="180" style="border-radius:50%; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
-    <h1>MONIRUL HASAN TALHA</h1>
-    <p><strong>Student of:</strong> Inter 2nd Year, BIAM Model College</p>
+  <div class="glow" aria-hidden></div>
+  <div class="wrap">
 
-    <h2>ব্যক্তিগত তথ্য</h2>
-    <p><strong>Father’s Name:</strong> Abdul Mannan Sarker</p>
-    <p><strong>Mother’s Name:</strong> Saiedatul Hure</p>
-    <p><strong>Siblings:</strong> ছোট একটি বোন আছে (Aysha siddika)</p>
-    <p><strong>Date of Birth:</strong> আল্লাহ যেদিন দেখাইছে ধরনীর আলো সেদিন </p>
-    <p><strong>Address:</strong> gobindagonj,gaibandha </p>
-    <p><strong>Contact:</strong> 01909751433 </p>
+    <header class="topbar" role="banner">
+      <div class="marquee" aria-hidden>
+        <div class="track">
+          <span class="name-run" id="headline">MONIRUL HASAN TALHA</span>
+        </div>
+      </div>
+    </header>
 
-    <h2>শিক্ষা</h2>
-    <ul>
-      <li>Inter 2nd Year – BIAM Model College</li>
-      <li>SSC – Tamirul millat kamil madrasah,tongi</li>
-    </ul>
+    <main class="card" role="main">
+      <div class="avatar">
+        <img src="https://i.postimg.cc/0yKXCf8J/Whats-App-Image-2025-08-30-at-18-45-53-af15fd1e.jpg" alt="Monirul's photo">
+      </div>
 
-    <h2>Skills</h2>
-    <ul>
-      <li>MS Office (Word, Excel, PowerPoint)</li>
-      <li>HTML,css,js Basic Coding</li>
-      <li>Public Speaking একদম ই পারি না ভাই </li>
-    </ul>
+      <div class="content">
+        <div class="accent-line"></div>
+        <h1 class="title"><span class="badge">Student</span> MONIRUL HASAN TALHA</h1>
+        <div class="meta"><strong>Inter 2nd Year</strong> · BIAM Model College • <span>Contact: 01909751433</span></div>
 
-    <h2>শখ (Hobbies)</h2>
-    <ul>
-      <li>boi porte vallagena </li>
-      <li>ক্রিকেট খেলা</li>
-      <li>নতুন কিছু শেখা</li>
-    </ul>
+        <h2>ব্যক্তিগত তথ্য</h2>
+        <p><strong>Father’s Name:</strong> Abdul Mannan Sarker</p>
+        <p><strong>Mother’s Name:</strong> Saiedatul Hure</p>
+        <p><strong>Siblings:</strong> ছোট একটি বোন আছে (Aysha siddika)</p>
+        <p><strong>Date of Birth:</strong> আল্লাহ যেদিন দেখাইছে ধরনীর আলো সেদিন</p>
+        <p><strong>Address:</strong> gobindagonj, gaibandha</p>
 
-    <h2>ভবিষ্যৎ লক্ষ্য</h2>
-    <p> apatoto inter pass kora।</p>
+        <h2>শিক্ষা</h2>
+        <ul>
+          <li>Inter 2nd Year – BIAM Model College</li>
+          <li>SSC – Tamirul Millat Kamil Madrasah, Tongi</li>
+        </ul>
 
-    <h2>Language Skills</h2>
-    <ul>
-      <li>বাংলা</li>
-      <li>hindi</li>
-    </ul>
+        <h2>Skills</h2>
+        <ul>
+          <li>MS Office (Word, Excel, PowerPoint)</li>
+          <li>HTML, CSS, JS Basic Coding</li>
+          <li>Public Speaking — একদম ই পারি না ভাই</li>
+        </ul>
 
-    <h2>Creator</h2>
-    <p>এই সাইট তৈরি করেছেন <strong>MONIRUL HASAN TALHA</strong></p>
+        <h2>শখ (Hobbies)</h2>
+        <ul>
+          <li>বই পড়া — বলে থাকি: "বই পড়তে ভাল লাগে না" 😅</li>
+          <li>ক্রিকেট খেলা</li>
+          <li>নতুন কিছু শেখা</li>
+        </ul>
+
+        <h2>ভবিষ্যৎ লক্ষ্য</h2>
+        <p>অপাট্টো inter পাস করা।</p>
+
+        <h2>Language Skills</h2>
+        <ul>
+          <li>বাংলা</li>
+          <li>Hindi</li>
+        </ul>
+
+        <h2>Creator</h2>
+        <p>এই সাইট তৈরি করেছেন <strong>MONIRUL HASAN TALHA</strong></p>
+      </div>
+    </main>
   </div>
+
+  <script>
+    (function(){
+      const el = document.getElementById('headline');
+      const text = el.textContent.trim();
+      const colors = ['#1db954','#f6c85f','#9b59b6','#e74c3c','#52b3d9','#f39c12'];
+      el.textContent = '';
+      for(let i=0;i<text.length;i++){
+        const ch = text[i];
+        const span = document.createElement('span');
+        span.textContent = ch;
+        if(ch.trim() === ''){ span.style.marginRight = '2px' }
+        span.style.color = colors[i % colors.length];
+        span.style.fontWeight = '700';
+        span.style.display = 'inline-block';
+        span.style.animation = 'hueShift 6s ease-in-out infinite';
+        span.style.animationDelay = (i%6)*0.08 + 's';
+        el.appendChild(span);
+      }
+    })();
+  </script>
 </body>
 </html>
