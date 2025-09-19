@@ -9,126 +9,96 @@
     :root{
       --bg1:#08131a;
       --bg2:#0f2a2b;
-      --accent:#1db954; /* spotify-like */
+      --accent:#1db954;
       --card-radius:18px;
     }
-
     *{box-sizing:border-box}
     body{
-      margin:0;
-      min-height:100vh;
-      font-family: 'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      margin:0; min-height:100vh;
+      font-family:'Noto Sans Bengali', system-ui;
       background: radial-gradient(1000px 600px at 10% 10%, rgba(29,185,84,0.06), transparent),
                   radial-gradient(800px 500px at 90% 90%, rgba(30,215,96,0.04), transparent),
                   linear-gradient(180deg,var(--bg1),var(--bg2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:40px;
-      color:#e9f1f0;
+      display:flex; align-items:center; justify-content:center;
+      padding:40px; color:#e9f1f0;
+      flex-direction:column;
     }
+    .glow{position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:radial-gradient(circle at 20% 20%, rgba(29,185,84,0.06), transparent 6%),
+                       radial-gradient(circle at 85% 80%, rgba(30,215,96,0.04), transparent 8%);
+      mix-blend-mode:screen;}
+    .wrap{width:100%;max-width:880px;position:relative;z-index:2}
+    header.topbar{height:64px;border-radius:12px;margin-bottom:18px;overflow:hidden;
+      display:flex;align-items:center;
+      background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(8px) saturate(1.1);}
+    .marquee{white-space:nowrap;overflow:hidden;width:100%;display:flex;align-items:center;height:100%;padding:0 18px}
+    .marquee .track{display:inline-block;padding-left:100%;animation:scroll-left 18s linear infinite}
+    @keyframes scroll-left{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+    .name-run span{font-weight:700;font-size:20px;margin-right:6px;display:inline-block}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));
+      border-radius:var(--card-radius);padding:28px;
+      border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(10px) saturate(1.1);
+      box-shadow:0 8px 40px rgba(2,8,10,0.6);display:flex;gap:20px;align-items:flex-start;}
+    .avatar{flex:0 0 180px;display:flex;align-items:center;justify-content:center}
+    .avatar img{width:160px;height:160px;border-radius:50%;object-fit:cover;
+      border:6px solid rgba(255,255,255,0.06);box-shadow:0 8px 30px rgba(29,185,84,0.06), inset 0 2px 6px rgba(255,255,255,0.02);}
+    .content{flex:1}
+    h1.title{font-size:22px;margin:0 0 6px 0;letter-spacing:0.6px;display:flex;align-items:center;gap:12px}
+    .meta{color:rgba(230,245,233,0.8);margin-bottom:14px}
+    h2{font-size:16px;margin:18px 0 8px 0;color:#cfeee0;border-bottom:1px dashed rgba(255,255,255,0.03);padding-bottom:6px}
+    p,li{color:#dff7ea;opacity:0.95} ul{margin:6px 0 0 18px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;
+      background:linear-gradient(90deg,rgba(29,185,84,0.14),rgba(29,185,84,0.06));
+      color:var(--accent);font-weight:700;font-size:13px}
+    @media(max-width:720px){.card{flex-direction:column;align-items:center;text-align:center}
+      .avatar{order:-1}.marquee .track{animation-duration:12s}.name-run span{font-size:18px}}
+    .accent-line{height:4px;width:72px;border-radius:99px;margin-bottom:10px;
+      background:linear-gradient(90deg,var(--accent),#66d17a);box-shadow:0 6px 24px rgba(29,185,84,0.08)}
+    @keyframes hueShift{0%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(60deg)}100%{filter:hue-rotate(0deg)}}
 
-    .glow {
-      position:fixed; inset:0; pointer-events:none; z-index:0;
-      background-image: radial-gradient(circle at 20% 20%, rgba(29,185,84,0.06), transparent 6%),
-                        radial-gradient(circle at 85% 80%, rgba(30,215,96,0.04), transparent 8%);
-      mix-blend-mode:screen;
+    /* Apps Section */
+    .apps{margin-top:30px;text-align:center}
+    .apps h2{color:#cfeee0}
+    .app-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:12px}
+    .app-buttons button{padding:10px 16px;border:none;border-radius:12px;background:var(--accent);
+      color:#fff;font-weight:600;cursor:pointer;transition:0.3s}
+    .app-buttons button:hover{background:#19a04b}
+    iframe#appFrame{margin-top:20px;width:100%;height:500px;border-radius:16px;border:none;display:none}
+    @media (max-width: 600px) {
+      .wrap { max-width: 100vw; padding: 0 2vw; }
+      .card { flex-direction: column; align-items: center; padding: 14px; }
+      .avatar img { width: 110px; height: 110px; }
+      .app-buttons { flex-direction: column; gap: 8px; }
+      .app-buttons button { min-width: 0; width: 100%; font-size: 15px; padding: 10px 0; }
+      iframe#appFrame { height: 320px; }
+      header.topbar { height: 48px; font-size: 15px; }
+      h1.title { font-size: 17px; }
     }
-
-    .wrap{
-      width:100%; max-width:880px; position:relative; z-index:2;
-    }
-
-    header.topbar{
-      height:64px; border-radius:12px; margin-bottom:18px;
-      overflow:hidden; display:flex; align-items:center;
-      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.04);
-      backdrop-filter: blur(8px) saturate(1.1);
-    }
-
-    .marquee{
-      white-space:nowrap; overflow:hidden; width:100%;
-      display:flex; align-items:center; height:100%;
-      padding:0 18px;
-    }
-    .marquee .track{
-      display:inline-block; padding-left:100%; animation:scroll-left 18s linear infinite;
-      will-change:transform;
-    }
-    @keyframes scroll-left{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-100%)}
-    }
-
-    .name-run span{ font-weight:700; font-size:20px; margin-right:6px; display:inline-block; }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border-radius:var(--card-radius);
-      padding:28px;
-      border:1px solid rgba(255,255,255,0.06);
-      backdrop-filter: blur(10px) saturate(1.1);
-      box-shadow: 0 8px 40px rgba(2,8,10,0.6);
-      display:flex; gap:20px; align-items:flex-start;
-    }
-
-    .avatar{
-      flex:0 0 180px; display:flex; align-items:center; justify-content:center;
-    }
-    .avatar img{ width:160px; height:160px; border-radius:50%; object-fit:cover; border:6px solid rgba(255,255,255,0.06); box-shadow: 0 8px 30px rgba(29,185,84,0.06), inset 0 2px 6px rgba(255,255,255,0.02); }
-
-    .content{ flex:1; }
-    h1.title{ font-size:22px; margin:0 0 6px 0; letter-spacing:0.6px; display:flex; align-items:center; gap:12px; }
-
-    .meta{ color:rgba(230,245,233,0.8); margin-bottom:14px }
-
-    h2{ font-size:16px; margin:18px 0 8px 0; color:#cfeee0; border-bottom:1px dashed rgba(255,255,255,0.03); padding-bottom:6px }
-    p, li{ color: #dff7ea; opacity:0.95 }
-    ul{ margin:6px 0 0 18px }
-
-    .badge{ display:inline-block; padding:6px 10px; border-radius:999px; background:linear-gradient(90deg, rgba(29,185,84,0.14), rgba(29,185,84,0.06)); color:var(--accent); font-weight:700; font-size:13px }
-
-    @media (max-width:720px){
-      .card{ flex-direction:column; align-items:center; text-align:center }
-      .avatar{ order:-1 }
-      .marquee .track{ animation-duration:12s }
-      .name-run span{ font-size:18px }
-    }
-
-    .accent-line{ height:4px; width:72px; border-radius:99px; margin-bottom:10px; background: linear-gradient(90deg,var(--accent), #66d17a); box-shadow:0 6px 24px rgba(29,185,84,0.08) }
-
-    @keyframes hueShift{ 0%{filter:hue-rotate(0deg)} 50%{filter:hue-rotate(60deg)} 100%{filter:hue-rotate(0deg)} }
-
   </style>
 </head>
 <body>
   <div class="glow" aria-hidden></div>
   <div class="wrap">
+    <header class="topbar"><div class="marquee"><div class="track">
+      <span class="name-run" id="headline">MONIRUL HASAN TALHA</span>
+    </div></div></header>
 
-    <header class="topbar" role="banner">
-      <div class="marquee" aria-hidden>
-        <div class="track">
-          <span class="name-run" id="headline">MONIRUL HASAN TALHA</span>
-        </div>
-      </div>
-    </header>
-
-    <main class="card" role="main">
+    <main class="card">
       <div class="avatar">
         <img src="https://i.postimg.cc/R05hBXqF/Whats-App-Image-2025-08-31-at-09-52-25-9ed8b8d0.jpg" alt="Monirul's photo">
       </div>
-
       <div class="content">
         <div class="accent-line"></div>
         <h1 class="title"><span class="badge">Student</span> MONIRUL HASAN TALHA</h1>
-        <div class="meta"><strong>Inter 2nd Year</strong> · BIAM Model College • <span>Contact: 01909751433</span></div>
-      <br>
+        <div class="meta"><strong>Inter 2nd Year</strong> · BIAM Model School and College,Bogura • <span>Contact: 01909751433</span></div>
+        <!-- তোমার Bio Data content একই থাকলো -->
+         <br>
         <h2>ব্যক্তিগত তথ্য</h2>
         <p><strong>Father’s Name:</strong> Abdul Mannan Sarker</p>
         <p><strong>Mother’s Name:</strong> Saiedatul Hure</p>
         <p><strong>Siblings:</strong> ছোট একটি বোন আছে (Aysha siddika)</p>
-        <p><strong>Date of Birth:</strong> আল্লাহ যেদিন দেখাইছে ধরনীর আলো সেদিন</p>
+        <p><strong>Date of Birth:</strong> 9th Nov 2008</p>
         <p><strong>Address:</strong> gobindagonj, gaibandha</p>
       <br>
         <h2>শিক্ষা</h2>
@@ -174,6 +144,8 @@
              <p><strong>Phone:</strong> 01909751433</p>
              <p><strong>Email:</strong> monirulhasantalha@gmail.com</p>
              <p><strong>Facebook:</strong> <a href="https://www.facebook.com/talha171219" target="_blank">facebook.com/yourprofile</a></p>
+             <p><strong>Whatsapp:</strong> <a href=" https://wa.me/qr/B2VPVRBPNQAZF1" targer="_blank">me.whatsapp</a></p>
+             <p><strong>Telegram:</strong> <a href="https://t.me/talha91108" targer="_blank">me.telegram</a></p>
       <br>  
 
 
@@ -181,27 +153,56 @@
         <p>এই সাইট তৈরি করেছেন <strong>MONIRUL HASAN TALHA</strong></p>
       </div>
     </main>
+    </div>
+
+    <!-- My Apps Section -->
+    <section class="apps">
+      <h2>My Apps(Click)</h2>
+      <div class="app-buttons">
+      <button onclick="loadApp('https://talha-171219.github.io/TO-DO-list-2-/')">📝 To-Do App</button>
+      <button onclick="loadApp('https://talha-171219.github.io/weather-app/')">🌦 Weather App</button>
+      <button onclick="loadApp('https://talha-171219.github.io/apk-chat/')">💬 Chat App</button>
+      <button onclick="loadApp('https://talha388204.github.io/AI-CHATBOT/full-error%20free')">🤖 AI Mini Bot</button>
+      <button onclick="loadApp('https://talha-c731xh03xl.mgx.world/')">📅 Event Splitter</button>
+      <button onclick="loadApp('https://talha-171219.github.io/casio-calculator.talha/')">🧮 Demo Calculator</button>
+      <button onclick="loadApp('https://talha-171219.github.io/lite-chat-app.minha/')">👤 Personal Chat</button>
+      <button onclick="loadApp('https://talha-171219.github.io/social-media/')">🌐 Simple-Social App</button>
+      <button onclick="loadApp('https://talha388204.github.io/webRec/')">🎥 SS Recorder for PC</button>
+      <button onclick="loadApp('https://talha388204.github.io/great-social-app/')">📱 FB Lite (Personal)</button>
+      <button onclick="loadApp('https://talha388204.github.io/E-Commerce-demo-by-talha/#/')">🛒 E-Commerce (Demo)</button>
+      <button onclick="loadApp('https://talha388204.github.io/money-tracker/')">💰 Money-Tracking</button>
+      <button onclick="loadApp('https://talha388204.github.io/focus-timer/timer-2')">⏲️ Focus-Timer</button>
+      <button onclick="loadApp('https://talha388204.github.io/lock-diary/')">🔒 Lock-Diary</button>
+      <button onclick="loadApp('https://talha-388204.github.io/countdown-app/')">⏳ Countdown App</button>
+      <button onclick="loadApp('https://talha388204.github.io/MediQueue/')">💊 MediQueue</button>
+      <button onclick="loadApp('https://talha388204.github.io/bkash-demo-/')">💸 Bkash (Demo)</button>
+      <button onclick="loadApp('https://talha388204.github.io/hello-priyotoma/')">❤️ Hello Priyotoma</button>
+      <button onclick="loadApp('https://talha388204.github.io/hello-priyotoma/nev.html')">🧭 Offline-Crowd-Navigation</button>
+      <!-- চাইলে এখানে আরও অ্যাপ add করতে পারবে -->
+      </div>
+      <iframe id="appFrame"></iframe>
+    </section>
   </div>
 
   <script>
     (function(){
-      const el = document.getElementById('headline');
-      const text = el.textContent.trim();
-      const colors = ['#1db954','#f6c85f','#9b59b6','#e74c3c','#52b3d9','#f39c12'];
-      el.textContent = '';
+      const el=document.getElementById('headline');
+      const text=el.textContent.trim();
+      const colors=['#1db954','#f6c85f','#9b59b6','#e74c3c','#52b3d9','#f39c12'];
+      el.textContent='';
       for(let i=0;i<text.length;i++){
-        const ch = text[i];
-        const span = document.createElement('span');
-        span.textContent = ch;
-        if(ch.trim() === ''){ span.style.marginRight = '2px' }
-        span.style.color = colors[i % colors.length];
-        span.style.fontWeight = '700';
-        span.style.display = 'inline-block';
-        span.style.animation = 'hueShift 6s ease-in-out infinite';
-        span.style.animationDelay = (i%6)*0.08 + 's';
-        el.appendChild(span);
-      }
+        const ch=text[i];const span=document.createElement('span');
+        span.textContent=ch;if(ch.trim()===''){span.style.marginRight='2px'}
+        span.style.color=colors[i%colors.length];
+        span.style.fontWeight='700';span.style.display='inline-block';
+        span.style.animation='hueShift 6s ease-in-out infinite';
+        span.style.animationDelay=(i%6)*0.08+'s';el.appendChild(span);}
     })();
+    function loadApp(url){
+      const frame=document.getElementById('appFrame');
+      frame.style.display='block'; frame.src=url;
+      frame.scrollIntoView({behavior:'smooth'});
+    }
   </script>
 </body>
 </html>
